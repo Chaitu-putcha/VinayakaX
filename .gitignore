@@ -1,0 +1,31 @@
+# Backend - Python
+backend/.venv/
+backend/__pycache__/
+backend/**/*.pyc
+backend/.env
+
+# Frontend - Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+
+# Database
+*.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel/
+
+# Build files
+build/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+/node_modules/
+

@@ -1,0 +1,68 @@
+/node_modules/
+# =========================
+# Backend - Python
+# =========================
+backend/.venv/
+backend/__pycache__/
+backend/**/*.pyc
+backend/.env
+
+# =========================
+# Frontend - Next.js
+# =========================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# =========================
+# Root Node.js
+# =========================
+node_modules/
+
+# =========================
+# Database
+# =========================
+*.db
+
+# =========================
+# Environment files
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Vercel
+# =========================
+.vercel/
+
+# =========================
+# Build files
+# =========================
+build/
+dist/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Debug logs
+# =========================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# =========================
+# TypeScript
+# =========================
+*.tsbuildinfo
+next-env.d.ts
+
+# =========================
+# Certificates / keys
+# =========================
+*.pem
