@@ -180,7 +180,7 @@ useState<
 
     // Announcements management data is fetched for BOTH roles.
     try {
-      const resAnn = await fetch("http://localhost:8000/api/announcements/manage/all", { headers });
+      const resAnn = await fetch("https://vinayakax-backend.onrender.com/api/announcements/manage/all", { headers });
       if (resAnn.ok) setAnnouncements(await resAnn.json());
     } catch {
       // Leave announcements empty; the section shows its own empty/error state.
@@ -189,7 +189,7 @@ useState<
     // Schedule data is fetched for BOTH roles — the public GET already
     // returns every item (Schedule has no publish/hide flag).
     try {
-      const resSch = await fetch("http://localhost:8000/api/schedule");
+      const resSch = await fetch("https://vinayakax-backend.onrender.com/api/schedule");
       if (resSch.ok) setScheduleItems(await resSch.json());
     } catch {
       // Leave scheduleItems empty; the section shows its own empty/error state.
@@ -202,22 +202,22 @@ useState<
     
     try {
       // 1. Fetch Analytics
-      const resAnalytics = await fetch("http://localhost:8000/api/admin/analytics", { headers });
+      const resAnalytics = await fetch("https://vinayakax-backend.onrender.com/api/admin/analytics", { headers });
       if (resAnalytics.ok) setAnalytics(await resAnalytics.json());
 
       // 2. Fetch Pending Photos
-      const resPhotos = await fetch("http://localhost:8000/api/gallery/pending", { headers });
+      const resPhotos = await fetch("https://vinayakax-backend.onrender.com/api/gallery/pending", { headers });
       if (resPhotos.ok) setPendingPhotos(await resPhotos.json());
 
       // 3. Fetch Volunteers
-      const resVolunteers = await fetch("http://localhost:8000/api/volunteers/all", { headers });
+      const resVolunteers = await fetch("https://vinayakax-backend.onrender.com/api/volunteers/all", { headers });
       if (resVolunteers.ok) setVolunteers(await resVolunteers.json());
 
       // 4. Fetch Expenses
-      const resExpenses = await fetch("http://localhost:8000/api/admin/expenses", { headers });
+      const resExpenses = await fetch("https://vinayakax-backend.onrender.com/api/admin/expenses", { headers });
       if (resExpenses.ok) setExpenses(await resExpenses.json());
       const resLive = await fetch(
-  "http://localhost:8000/api/live/"
+  "https://vinayakax-backend.onrender.com/api/live/"
 );
 
 if (resLive.ok) {
@@ -269,7 +269,7 @@ if (resLive.ok) {
   const handleApprovePhoto = async (id: number) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/gallery/${id}/approve`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/gallery/${id}/approve`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -283,7 +283,7 @@ if (resLive.ok) {
   const handleRejectPhoto = async (id: number) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/gallery/${id}`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/gallery/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -297,7 +297,7 @@ if (resLive.ok) {
   const handleApproveVolunteer = async (id: number, approved: boolean) => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`http://localhost:8000/api/volunteers/${id}`, {
+      const response = await fetch(`https://vinayakax-backend.onrender.com/api/volunteers/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -322,7 +322,7 @@ if (resLive.ok) {
 
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch("http://localhost:8000/api/admin/expenses", {
+      const res = await fetch("https://vinayakax-backend.onrender.com/api/admin/expenses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -358,7 +358,7 @@ if (resLive.ok) {
   const handleDeleteExpense = async (id: number) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/admin/expenses/${id}`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/admin/expenses/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -374,7 +374,7 @@ if (resLive.ok) {
 
   if (!cameraName || !cameraUrl) return;
 
-  const response = await fetch("http://localhost:8000/api/live/", {
+  const response = await fetch("https://vinayakax-backend.onrender.com/api/live/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -422,8 +422,8 @@ if (resLive.ok) {
     try {
       const response = await fetch(
         editingAnnId
-          ? `http://localhost:8000/api/announcements/${editingAnnId}`
-          : "http://localhost:8000/api/announcements",
+          ? `https://vinayakax-backend.onrender.com/api/announcements/${editingAnnId}`
+          : "https://vinayakax-backend.onrender.com/api/announcements",
         {
           method: editingAnnId ? "PUT" : "POST",
           headers: {
@@ -469,7 +469,7 @@ if (resLive.ok) {
     if (!annDeleteTarget) return;
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/announcements/${annDeleteTarget.id}`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/announcements/${annDeleteTarget.id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -488,7 +488,7 @@ if (resLive.ok) {
   const handleTogglePin = async (a: AnnouncementItem) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/announcements/${a.id}/pin`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/announcements/${a.id}/pin`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -501,7 +501,7 @@ if (resLive.ok) {
   const handleTogglePublish = async (a: AnnouncementItem) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/announcements/${a.id}/publish`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/announcements/${a.id}/publish`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -541,8 +541,8 @@ if (resLive.ok) {
     try {
       const response = await fetch(
         editingSchId
-          ? `http://localhost:8000/api/schedule/${editingSchId}`
-          : "http://localhost:8000/api/schedule",
+          ? `https://vinayakax-backend.onrender.com/api/schedule/${editingSchId}`
+          : "https://vinayakax-backend.onrender.com/api/schedule",
         {
           method: editingSchId ? "PUT" : "POST",
           headers: {
@@ -594,7 +594,7 @@ if (resLive.ok) {
     if (!schDeleteTarget) return;
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/schedule/${schDeleteTarget.id}`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/schedule/${schDeleteTarget.id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -613,7 +613,7 @@ if (resLive.ok) {
   const handleToggleImportant = async (s: ScheduleItem) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:8000/api/schedule/${s.id}/important`, {
+      const res = await fetch(`https://vinayakax-backend.onrender.com/api/schedule/${s.id}/important`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}` }
       });

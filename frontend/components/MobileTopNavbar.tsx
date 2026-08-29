@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import ProfileAvatar from "./ProfileAvatar";
 
-const API = "http://localhost:8000";
+const API = "https://vinayakax-backend.onrender.com";
 
 const NAV_LINKS = [
   { href: "/home", label: "Home", icon: Home },

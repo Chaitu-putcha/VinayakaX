@@ -54,7 +54,7 @@ console.log("Condition =", Date.now() > Number(expiry));
 }
     
     // 1. Fetch latest announcements (public endpoint, published-only, pinned first)
-    fetch("http://localhost:8000/api/announcements")
+    fetch("https://vinayakax-backend.onrender.com/api/announcements")
       .then(res => res.json())
       .then(data => setAnnouncements(data.slice(0, 5)))
       .catch(() => {
@@ -70,7 +70,7 @@ console.log("Condition =", Date.now() > Number(expiry));
       });
 
     // 2. Fetch events
-    fetch("http://localhost:8000/api/events")
+    fetch("https://vinayakax-backend.onrender.com/api/events")
       .then(res => res.json())
       .then(data => setEvents(data.slice(0, 3)))
       .catch(() => {

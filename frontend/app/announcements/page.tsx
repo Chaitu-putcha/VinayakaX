@@ -34,7 +34,7 @@ export default function AnnouncementsPage() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/announcements")
+    fetch("https://vinayakax-backend.onrender.com/api/announcements")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load");
         return res.json();

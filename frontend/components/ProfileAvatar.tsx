@@ -25,7 +25,7 @@ export default function ProfileAvatar({
 }: ProfileAvatarProps) {
   // Fix the UI 404 by prepending the backend host to relative static paths
   const displayUrl = photoUrl?.startsWith("/") 
-    ? `http://127.0.0.1:8000${photoUrl}` 
+    ? `https://vinayakax-backend.onrender.com${photoUrl}` 
     : photoUrl;
 
   if (displayUrl) {

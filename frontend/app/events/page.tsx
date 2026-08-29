@@ -30,7 +30,7 @@ export default function Events() {
   const categories = ["All", "Pooja", "Cultural", "Food", "Nimajjanam"];
 
   const fetchEvents = () => {
-    fetch("http://localhost:8000/api/events")
+    fetch("https://vinayakax-backend.onrender.com/api/events")
       .then(res => res.json())
       .then(data => setEvents(data))
       .catch((error) => {
@@ -55,8 +55,8 @@ export default function Events() {
     try {
       const response = await fetch(
   editingId
-    ? `http://localhost:8000/api/events/${editingId}`
-    : "http://localhost:8000/api/events",
+    ? `https://vinayakax-backend.onrender.com/api/events/${editingId}`
+    : "https://vinayakax-backend.onrender.com/api/events",
   {
     method: editingId ? "PUT" : "POST",
         headers: {
@@ -95,7 +95,7 @@ export default function Events() {
     const token = localStorage.getItem("token");
     if (!confirm("Are you sure you want to delete this event?")) return;
     try {
-      const response = await fetch(`http://localhost:8000/api/events/${id}`, {
+      const response = await fetch(`https://vinayakax-backend.onrender.com/api/events/${id}`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` }
       });

@@ -42,7 +42,7 @@ export default function SchedulePage() {
   const [activeDay, setActiveDay] = useState(1);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/schedule")
+    fetch("https://vinayakax-backend.onrender.com/api/schedule")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to load");
         return res.json();

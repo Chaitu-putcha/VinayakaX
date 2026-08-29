@@ -73,7 +73,7 @@ export default function Gallery() {
 
   const fetchGallery = (currentAlbum = album, currentSearch = search) => {
     setLoading(true);
-    let apiPath = `http://localhost:8000/api/gallery?skip=0&limit=${page * pageSize}`;
+    let apiPath = `https://vinayakax-backend.onrender.com/api/gallery?skip=0&limit=${page * pageSize}`;
     if (currentAlbum !== "All") apiPath += `&album=${currentAlbum}`;
     if (currentSearch) apiPath += `&search=${currentSearch}`;
 
@@ -157,7 +157,7 @@ formData.append("caption", caption);
 formData.append("album", selectedAlbum);
 formData.append("tags", tags);
 
-      const response = await fetch("http://localhost:8000/api/gallery/upload", {
+      const response = await fetch("https://vinayakax-backend.onrender.com/api/gallery/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -230,7 +230,7 @@ const openFilePicker = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/api/gallery/${id}/like`, {
+      const response = await fetch(`https://vinayakax-backend.onrender.com/api/gallery/${id}/like`, {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -251,7 +251,7 @@ const handleFavorite = async (id: number) => {
   }
 
   const response = await fetch(
-    `http://localhost:8000/api/gallery/${id}/favorite`,
+    `https://vinayakax-backend.onrender.com/api/gallery/${id}/favorite`,
     {
       method: "POST",
       headers: {
@@ -290,7 +290,7 @@ const handleFavorite = async (id: number) => {
 
   try {
     const response = await fetch(
-      `http://localhost:8000/api/gallery/${itemId}/comment`,
+      `https://vinayakax-backend.onrender.com/api/gallery/${itemId}/comment`,
       {
         method: "POST",
         headers: {
@@ -327,7 +327,7 @@ const handleDeleteComment = async (
 
   try {
     const response = await fetch(
-      `http://localhost:8000/api/gallery/${galleryId}/comment/${commentIndex}`,
+      `https://vinayakax-backend.onrender.com/api/gallery/${galleryId}/comment/${commentIndex}`,
       {
         method: "DELETE",
         headers: {
@@ -372,7 +372,7 @@ const handleDeleteComment = async (
   if (!confirm("Delete this photo?")) return;
 
   const response = await fetch(
-    `http://localhost:8000/api/gallery/${id}`,
+    `https://vinayakax-backend.onrender.com/api/gallery/${id}`,
     {
       method: "DELETE",
       headers: {
@@ -401,7 +401,7 @@ const handleEdit = async () => {
 
     const response = await fetch(
 
-      `http://localhost:8000/api/gallery/${selectedImage.id}`,
+      `https://vinayakax-backend.onrender.com/api/gallery/${selectedImage.id}`,
 
       {
 
@@ -802,7 +802,7 @@ setPreviewUrls(
           const imageUrl =
   item.url.startsWith("http")
     ? item.url
-    : `http://localhost:8000${item.url}`;
+    : `https://vinayakax-backend.onrender.com${item.url}`;
 
 console.log("Rendered URL:", imageUrl);
           const comments: GalleryComment[] = JSON.parse(item.comments_json || "[]");
@@ -876,7 +876,7 @@ console.log("Rendered URL:", imageUrl);
                     href={
   item.url.startsWith("http")
     ? item.url
-    : `http://localhost:8000${item.url}`
+    : `https://vinayakax-backend.onrender.com${item.url}`
 }
                     download={`vinayakax_${item.id}.jpg`}
                     target="_blank"
@@ -1048,7 +1048,7 @@ currentIndex===0
   src={
   selectedImage.url.startsWith("http")
     ? selectedImage.url
-    : `http://localhost:8000${selectedImage.url}`
+    : `https://vinayakax-backend.onrender.com${selectedImage.url}`
 }
   alt={selectedImage.caption}
   className="w-full max-h-[80vh] object-contain rounded-xl transition-all duration-300"
@@ -1160,7 +1160,7 @@ currentIndex === items.length - 1
             href={
   selectedImage.url.startsWith("http")
     ? selectedImage.url
-    : `http://localhost:8000${selectedImage.url}`
+    : `https://vinayakax-backend.onrender.com${selectedImage.url}`
 }
             download
             className="text-green-600 hover:text-green-800"

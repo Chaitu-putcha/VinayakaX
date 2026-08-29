@@ -6,7 +6,7 @@
  * edit_profile_integration.md for the exact 3-line wiring.
  */
 
-const API = "http://localhost:8000";
+const API = "https://vinayakax-backend.onrender.com";
 
 export interface ProfileUploadResult {
   profile_image_url: string | null;

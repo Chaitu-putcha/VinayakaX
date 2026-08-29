@@ -41,7 +41,7 @@ localStorage.setItem("token_expiry", expiryTime.toString());
   };
 
   const handleLogin = async (loginEmail: string, loginPassword: string) => {
-    const response = await fetch("http://localhost:8000/api/auth/login", {
+    const response = await fetch("https://vinayakax-backend.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -71,7 +71,7 @@ console.log("USER ID =", data.id);
         await handleLogin(email, password);
       } else {
         // Register the new devotee account first
-        const registerResponse = await fetch("http://localhost:8000/api/auth/register", {
+        const registerResponse = await fetch("https://vinayakax-backend.onrender.com/api/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, full_name: fullName, password }),

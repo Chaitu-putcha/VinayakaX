@@ -33,7 +33,7 @@ import {
 // backend/schemas.py. No new endpoints, no invented routes.
 // ====================================================================
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://vinayakax-backend.onrender.com";
 
 type ApiResult<T> =
   | { ok: true; data: T }

@@ -16,7 +16,7 @@ const handleSendOTP = async () => {
 
   try {
     const response = await fetch(
-      "http://127.0.0.1:8000/api/auth/forgot-password",
+      "https://vinayakax-backend.onrender.com/api/auth/forgot-password",
       {
         method: "POST",
         headers: {
@@ -46,7 +46,7 @@ const handleVerifyOTP = async () => {
 
   try {
     const response = await fetch(
-      "http://127.0.0.1:8000/api/auth/verify-otp",
+      "https://vinayakax-backend.onrender.com/api/auth/verify-otp",
       {
         method: "POST",
         headers: {
@@ -83,7 +83,7 @@ const handleVerifyOTP = async () => {
     }
 
     const response = await fetch(
-      "http://127.0.0.1:8000/api/auth/reset-password",
+      "https://vinayakax-backend.onrender.com/api/auth/reset-password",
       {
         method: "POST",
         headers: {

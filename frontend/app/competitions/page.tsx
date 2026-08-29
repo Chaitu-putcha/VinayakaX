@@ -14,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 
-const API_URL = "http://localhost:8000";
+const API_URL = "https://vinayakax-backend.onrender.com";
 
 interface CompetitionItem {
   id: number;

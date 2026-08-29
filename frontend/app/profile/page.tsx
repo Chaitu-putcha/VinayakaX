@@ -37,7 +37,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://127.0.0.1:8000/api/auth/me", {
+      const response = await fetch("https://vinayakax-backend.onrender.com/api/auth/me", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default function ProfilePage() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("http://127.0.0.1:8000/api/profile/photo", {
+      const response = await fetch("https://vinayakax-backend.onrender.com/api/profile/photo", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -127,7 +127,7 @@ export default function ProfilePage() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://127.0.0.1:8000/api/auth/change-password", {
+      const response = await fetch("https://vinayakax-backend.onrender.com/api/auth/change-password", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

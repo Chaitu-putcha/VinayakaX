@@ -73,7 +73,7 @@ export default function AIChatbot() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout (safety margin on top of the backend fix)
 
-      const response = await fetch("http://localhost:8000/api/chatbot", {
+      const response = await fetch("https://vinayakax-backend.onrender.com/api/chatbot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
