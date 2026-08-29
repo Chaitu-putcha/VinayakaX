@@ -51,6 +51,7 @@ COMMITTEE_MEMBERS = [
     ("chaitanya@vinayakax.com", "Chaitanya", "Committee Member"),
     ("kiran@vinayakax.com", "Kiran", "Committee Member"),
     ("kotesh@vinayakax.com", "Kotesh", "Committee Member"),
+    ("venky@vinayakax.com", "Venky Chotu", "Main Head"),
 ]
 
 
