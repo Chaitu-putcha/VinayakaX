@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, Mic, MicOff, Bot } from "lucide-react";
@@ -57,7 +57,7 @@ export default function AIChatbot() {
     }
   };
 
-  // Every message — typed, spoken, or from a quick-action button — goes
+  // Every message â€” typed, spoken, or from a quick-action button â€” goes
   // through this single function, which always calls the real backend
   // (FastAPI -> Gemini). There is no client-side keyword logic here.
   const handleSendMessage = async (textToSend: string) => {
@@ -71,7 +71,7 @@ export default function AIChatbot() {
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s timeout (safety margin on top of the backend fix)
+      const timeoutId = setTimeout(() => controller.abort(), 90000); // 30s timeout (safety margin on top of the backend fix)
 
       const response = await fetch("https://vinayakax-backend.onrender.com/api/chatbot", {
         method: "POST",
@@ -197,11 +197,11 @@ export default function AIChatbot() {
               Pooja location
             </button>
             <button
-              onClick={() => handleQuickQuestion("తెలుగులో చెప్పండి (Telugu)?")}
+              onClick={() => handleQuickQuestion("à°¤à±†à°²à±à°—à±à°²à±‹ à°šà±†à°ªà±à°ªà°‚à°¡à°¿ (Telugu)?")}
               disabled={isLoading}
               className="text-[10px] bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-600 hover:border-saffron-500 rounded-full px-2.5 py-1 text-stone-600 dark:text-stone-300 hover:text-saffron-600 transition-colors disabled:opacity-50"
             >
-              తెలుగు
+              à°¤à±†à°²à±à°—à±
             </button>
           </div>
 
