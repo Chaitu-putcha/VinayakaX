@@ -1,4 +1,4 @@
-import os
+﻿import os
 import time
 import logging
 import traceback
@@ -24,9 +24,9 @@ logger = logging.getLogger("uvicorn.error")
 
 def _reconcile_donations_table():
     """
-    Base.metadata.create_all() only CREATES tables that don't exist yet — it
+    Base.metadata.create_all() only CREATES tables that don't exist yet â€” it
     never ALTERs an existing one. models.py's own comment on the Donation
-    model ("intentionally has NO payment-gateway fields — no transaction_id,
+    model ("intentionally has NO payment-gateway fields â€” no transaction_id,
     payment_method, status, receipt_number, is_anonymous") implies an EARLIER
     version of this table had those columns. If that old table is still in
     the dev SQLite file with e.g. `transaction_id` defined NOT NULL, every
@@ -37,7 +37,7 @@ def _reconcile_donations_table():
     ALTER TABLE ADD COLUMN can add missing columns but cannot safely drop or
     relax an old NOT NULL column in SQLite. So instead: if the existing
     table's columns don't exactly match the current model, rename the old
-    table out of the way (never delete it — your old rows are preserved
+    table out of the way (never delete it â€” your old rows are preserved
     under the backup name) and let create_all() build a fresh, correctly
     shaped `donations` table right after this runs. Only touches the
     `donations` table; every other table is untouched.
@@ -47,7 +47,7 @@ def _reconcile_donations_table():
 
     inspector = inspect(engine)
     if "donations" not in inspector.get_table_names():
-        return  # doesn't exist yet — create_all() will make a fresh, correct one
+        return  # doesn't exist yet â€” create_all() will make a fresh, correct one
 
     expected_columns = {
         "id", "donor_name", "family_name", "contribution_amount",
@@ -57,7 +57,7 @@ def _reconcile_donations_table():
     existing_columns = {col["name"] for col in inspector.get_columns("donations")}
 
     if existing_columns == expected_columns:
-        return  # already matches the current model — nothing to do
+        return  # already matches the current model â€” nothing to do
 
     backup_name = f"donations_legacy_{int(time.time())}"
     print(
@@ -85,7 +85,7 @@ def _reconcile_announcements_table():
     will throw sqlite3.IntegrityError.
 
     Since the old table was never actually served by any endpoint, there
-    is no real user-facing data to lose here — but we still rename rather
+    is no real user-facing data to lose here â€” but we still rename rather
     than drop, so nothing is deleted if that assumption is ever wrong.
     Only touches the `announcements` table; every other table is
     untouched.
@@ -95,7 +95,7 @@ def _reconcile_announcements_table():
 
     inspector = inspect(engine)
     if "announcements" not in inspector.get_table_names():
-        return  # doesn't exist yet — create_all() will make a fresh, correct one
+        return  # doesn't exist yet â€” create_all() will make a fresh, correct one
 
     expected_columns = {
         "id", "title", "description", "event_datetime",
@@ -104,7 +104,7 @@ def _reconcile_announcements_table():
     existing_columns = {col["name"] for col in inspector.get_columns("announcements")}
 
     if existing_columns == expected_columns:
-        return  # already matches the current model — nothing to do
+        return  # already matches the current model â€” nothing to do
 
     backup_name = f"announcements_legacy_{int(time.time())}"
     print(
@@ -124,13 +124,13 @@ def _ensure_volunteer_tasks_audit_column():
     Fixes: sqlite3.OperationalError: no such column: volunteer_tasks.audit_log_json
 
     The VolunteerTask model has an `audit_log_json` column, but
-    Base.metadata.create_all() ONLY creates tables that don't exist yet —
+    Base.metadata.create_all() ONLY creates tables that don't exist yet â€”
     it never ALTERs an existing table. If `volunteer_tasks` was created
     before `audit_log_json` was added to the model, every SELECT that
     touches VolunteerTask (list, stats, conflict-check, create, etc.)
     throws this OperationalError, which surfaces in the browser as the
     connection dying mid-request (misleadingly reported as "backend
-    unreachable" / "failed to fetch" — the request DID reach FastAPI,
+    unreachable" / "failed to fetch" â€” the request DID reach FastAPI,
     it crashed while running the query).
 
     This is a single, purely additive column with a constant default, so
@@ -145,16 +145,16 @@ def _ensure_volunteer_tasks_audit_column():
 
     inspector = inspect(engine)
     if "volunteer_tasks" not in inspector.get_table_names():
-        return  # doesn't exist yet — create_all() will make a fresh, correct one
+        return  # doesn't exist yet â€” create_all() will make a fresh, correct one
 
     existing_columns = {col["name"] for col in inspector.get_columns("volunteer_tasks")}
     if "audit_log_json" in existing_columns:
-        return  # already matches the current model — nothing to do
+        return  # already matches the current model â€” nothing to do
 
     print(
         "[startup] volunteer_tasks.audit_log_json column is missing "
         "(this is why VolunteerTask queries were crashing with "
-        "'no such column'). Adding it via ALTER TABLE — all existing "
+        "'no such column'). Adding it via ALTER TABLE â€” all existing "
         "rows are preserved, and each gets the default value '[]'."
     )
     with engine.begin() as conn:
@@ -167,13 +167,13 @@ _reconcile_announcements_table()
 _ensure_volunteer_tasks_audit_column()
 
 # Create database tables (creates fresh `donations`/`announcements` tables
-# if they were just renamed above, and creates any other missing tables —
+# if they were just renamed above, and creates any other missing tables â€”
 # including the new `volunteer_tasks`, `service_areas`, and `notifications`
-# tables — as before)
+# tables â€” as before)
 Base.metadata.create_all(bind=engine)
 
 # Ensure the 9 committee members have a User + an APPROVED Volunteer row
-# (fixes the "Select Volunteer" dropdown being empty — see
+# (fixes the "Select Volunteer" dropdown being empty â€” see
 # backend/seed_committee.py for the full explanation). Safe to run on
 # every startup: it only creates what's missing and never touches a real
 # applicant's own Volunteer record.
@@ -199,13 +199,13 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     ServerErrorMiddleware -> CORSMiddleware -> ExceptionMiddleware -> routes.
     An UNHANDLED exception propagates all the way up past CORSMiddleware to
     the outermost ServerErrorMiddleware, which builds its own bare-bones
-    plain-text 500 response OUTSIDE CORSMiddleware's reach — so that
+    plain-text 500 response OUTSIDE CORSMiddleware's reach â€” so that
     response never gets an Access-Control-Allow-Origin header, and the
     browser reports "blocked by CORS policy" even though CORS config was
     never actually the problem.
 
     This handler is registered via @app.exception_handler, so it runs
-    INSIDE ExceptionMiddleware, which sits below CORSMiddleware — its
+    INSIDE ExceptionMiddleware, which sits below CORSMiddleware â€” its
     JSONResponse DOES pass back through CORSMiddleware and gets proper CORS
     headers attached, on every route, not just donations. It also logs the
     full traceback so the real exception is visible in the backend terminal
@@ -224,22 +224,20 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 
 
 # CORS configuration
+# Vercel production frontend enabled
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://vinayaka-x-lilac.vercel.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # Static directory (absolute path)
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = BASE_DIR / "static"
@@ -268,7 +266,7 @@ app.include_router(schedule.router)
 app.include_router(auth.router)
 app.include_router(profile_photo_router)
 
-# TEMPORARY DEBUG LOGGING — remove once routing is confirmed correct.
+# TEMPORARY DEBUG LOGGING â€” remove once routing is confirmed correct.
 # Prints EVERY route FastAPI actually registered, with its methods, so
 # there is no more guessing about whether e.g. /api/volunteers/all or
 # /api/volunteers really exist. Look for these two lines specifically
