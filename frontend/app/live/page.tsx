@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Play,
   Video,
@@ -29,13 +29,19 @@ export default function LiveDarshan() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Temporary current user
-  // Later we will get this from login/backend
-  const currentUser = {
-    id: Number(localStorage.getItem("user_id")) || 1,
-    name: localStorage.getItem("fullName") || "Devotee",
-    role: localStorage.getItem("role") || "user",
-  };
+  const [currentUser, setCurrentUser] = useState({
+    id: 1,
+    name: "Devotee",
+    role: "user",
+  });
+
+  useEffect(() => {
+    setCurrentUser({
+      id: Number(localStorage.getItem("user_id")) || 1,
+      name: localStorage.getItem("fullName") || "Devotee",
+      role: localStorage.getItem("role") || "user",
+    });
+  }, []);
 
   const handleFileChange = (
     event: React.ChangeEvent<HTMLInputElement>
